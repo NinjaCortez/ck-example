@@ -1,0 +1,5 @@
+// TODO - test if constants are set on uninstall
+
+ckexample_app()->logger( __FUNCTION__, __CLASS__, [
+    'api_log' => (bool) ckexample_app()->get_settings('api_log', false)
+] );

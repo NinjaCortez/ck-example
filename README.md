@@ -1,0 +1,2 @@
+# ckexample
+ Example Plugin Setup

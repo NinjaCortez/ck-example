@@ -1,0 +1,14 @@
+{
+  "name": "ckexample-admin",
+  "version": "1.0.0",
+  "description": "CK Example Admin Settings",
+  "scripts": {
+      "build": "wp-scripts build",
+      "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^25.4.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

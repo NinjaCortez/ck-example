@@ -19,10 +19,11 @@ if (class_exists('ckexample_core_class') ) {
         public function __construct() {  
         }
 
-         /**
+        /**
          * Operation Whitelist
-         *
+         * 
          * @access private
+         * @var array - Operation Function To Class Map for Defaults 
          */
         private $operations_whitelist = [
             'add_contact'     => 'ckexample_webhook_functions',
@@ -32,14 +33,6 @@ if (class_exists('ckexample_core_class') ) {
             'set_date'        => 'ckexample_webhook_functions',
             'update_keys'     => 'ckexample_webhook_functions',
         ];
-        
-        /**
-         * Registerd Hooks
-         * 
-         * @access	private
-         * @var		string    $registered_hooks    Specific Hook IDs Registered for the active CRM
-         */
-        private $registered_hooks = [];
 
         /**
          * Register Routes
@@ -49,8 +42,8 @@ if (class_exists('ckexample_core_class') ) {
         function register_routes(){
             $ns = ckexample_app()->ns();
             register_rest_route( "{$ns}/v1", '/action/(?P<ckexample_id>[^/]+)', [
-                'methods' 			  => ['POST'],
-                'callback'			  => [$this, 'manage_request'],
+                'methods'             => ['POST'],
+                'callback'            => [$this, 'manage_request'],
                 'permission_callback' => [$this, 'permissions']
             ] );
         }
@@ -183,8 +176,10 @@ if (class_exists('ckexample_core_class') ) {
             return apply_filters( 'ckexample/http/operations/whitelist', $this->operations_whitelist );
         }
 
-        
-        private $access_token      = '5FxJzRrNjJSpiX8jNS2tRTakZeCUe3d7Mz9kJPPVdn';
+        /**
+         * @var string $access_token
+         */
+        private $access_token = '5FxJzRrNjJSpiX8jNS2tRTakZeCUe3d7Mz9kJPPVdn';
 
     // End of Class
     }

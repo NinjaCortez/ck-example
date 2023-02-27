@@ -15,28 +15,28 @@ if ( class_exists('ckexample_core_class') ) {
 
         private function __construct() {
         }
-
+        
         static function activate() {
             self::create_db_tables();
             ckexample_cron_class::set_schedule();
         }
-
+        
         static function deactivate() {
             ckexample_cron_class::unschedule();
-		}
-
+        }
+        
         static function uninstall() {
             ckexample_cron_class::unschedule();
             self::drop_db_tables();
             delete_option(CKEXAMPLE_SETTINGS); // ckexample-settings
         }
-
+        
         private static function create_db_tables() {
-
+            
             global $wpdb;
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
             $table = CKEXAMPLE_DB_EXAMPLE;
-
+            
             // License
             $sql = "CREATE TABLE {$table} ( \n" .
                 "id bigint(20) unsigned NOT NULL auto_increment, \n" .
@@ -62,13 +62,13 @@ if ( class_exists('ckexample_core_class') ) {
             dbDelta( $sql );
 
         }
-
+        
         private static function drop_db_tables() {
             global $wpdb;
             $table = CKEXAMPLE_DB_EXAMPLE;
             $wpdb->query("DROP TABLE IF EXISTS `{$table}`;");
         }
-
-        // End Class
+        
+    // End Class
     }
 }

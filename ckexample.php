@@ -24,7 +24,7 @@ if ( defined('ABSPATH') ) {
 		require_once CKEXAMPLE_HOME_DIR . 'classes/core.php';
 
 		function ckexample_app() : ckexample_core_class {
-            return ckexample_core_class::get_instance();
+			return ckexample_core_class::get_instance();
 		}
 
 		ckexample_app();

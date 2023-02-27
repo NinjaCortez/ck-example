@@ -32,9 +32,9 @@ if ( class_exists('ckexample_core_class') ) {
          */
         public function __construct() {
             parent::__construct( [
-				'singular' => 'log',
-				'plural'   => 'logs',
-				'ajax'     => false
+                'singular' => 'log',
+                'plural'   => 'logs',
+                'ajax'     => false
             ]);
         }
 

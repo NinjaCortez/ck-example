@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('ABSPATH') || ! defined('CKEXAMPLE_HOME') ) {
-	header('HTTP/1.0 403 Forbidden');
-	die();
+    header('HTTP/1.0 403 Forbidden');
+    die();
 }
 
 /**
@@ -20,7 +20,7 @@ class ckexample_core_class {
      * @var string $plugin - The plugin namespace ID
      */
     function plugin_loaded( $plugin ) {
-
+        
         if ( stripos($plugin, "/{$this->ns}.php") === false ) {
             return;
         }
@@ -32,7 +32,7 @@ class ckexample_core_class {
         // Initialize class autoloader
         $this->init_autoloader();
         // Activate, Deactivate & Uninstall
-		$this->register_activation_hooks();
+        $this->register_activation_hooks();
         // Schedule CRON Jobs
         ckexample_cron_class::set_schedule();
         // Register WP Hooks
@@ -73,7 +73,7 @@ class ckexample_core_class {
         register_activation_hook( CKEXAMPLE_HOME, [$class, 'activate'] );
         register_uninstall_hook( CKEXAMPLE_HOME, [$class, 'uninstall'] );
         register_deactivation_hook( CKEXAMPLE_HOME, [$class, 'deactivate'] );
-	}
+    }
 
     /**
      * Register WordPress Hooks
@@ -104,16 +104,16 @@ class ckexample_core_class {
      * Dependency Checks - Pro Versions || Plugin Compatability || etc 
      */
 	function dependency_check() : bool {
-		/*
-		// WooCommerce
+        /*
+        // WooCommerce
         if ( ! class_exists('WC_Integration') ) {
             $message = __( 'CK Example plugin requires the WooCommerce plugin to be installed and active.', $ns );
             new ckexample_admin_notice( 'error', __('CK Example Error', $ns), $message );
             return false;
         }
-		*/
-		return true;
-	}
+        */
+        return true;
+    }
 
     /**
      * Register REST Properties
@@ -215,9 +215,9 @@ class ckexample_core_class {
      */
     function save_settings() {
         if ( is_array($this->settings) && ! empty($this->settings) ) {
-            $success = update_option(CKEXAMPLE_SETTINGS, $this->settings, true);
+            update_option(CKEXAMPLE_SETTINGS, $this->settings, true);
         }
-	}
+    }
 
     /**
      * Get Settings
@@ -272,7 +272,7 @@ class ckexample_core_class {
      */
     private function init_autoloader() {
         $class_dir     = CKEXAMPLE_CLASS_DIR;
-		$screen_dir    = CKEXAMPLE_SCREEN_DIR;
+        $screen_dir    = CKEXAMPLE_SCREEN_DIR;
         $this->classes = [
             "{$this->ns}_activation_class"   => "{$class_dir}activation",
             "{$this->ns}_admin_class"        => "{$class_dir}admin",
@@ -282,12 +282,12 @@ class ckexample_core_class {
             "{$this->ns}_frontend_class"     => "{$class_dir}frontend",
             "{$this->ns}_rest_class"         => "{$class_dir}rest",
             "{$this->ns}_webhook_services"   => "{$class_dir}webhook_services",
-			// Admin Screens
+            // Admin Screens
             "{$this->ns}_admin_screen_base"  => "{$screen_dir}base",
             "{$this->ns}_screen"             => "{$screen_dir}{$this->ns}",
             "{$this->ns}_api_log_screen"     => "{$screen_dir}api_log"
         ];
-
+        
         spl_autoload_register( [$this, 'autoloader'] );
     }
 
@@ -317,8 +317,8 @@ class ckexample_core_class {
     function logger( string $class, string $function, $data ) {
         if( defined('CKEXAMPLE_DEBUG') && CKEXAMPLE_DEBUG ){
             $trace  = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-			$file   = $trace[0]['file'];
-			$line   = $trace[0]['line'];
+            $file   = $trace[0]['file'];
+            $line   = $trace[0]['line'];
             $log    = "\n\nFile = {$file}\n";
             $log   .= "Class = {$class}\n";
             $log   .= "Function = {$function}\n";
@@ -344,7 +344,7 @@ class ckexample_core_class {
 
     /**
      * Singleton Instance of Frontend Class
-     *
+     * 
      * @return ckexample_frontend_class
      */
     function frontend() : ckexample_frontend_class {
@@ -353,35 +353,33 @@ class ckexample_core_class {
     
     /**
      * Singleton Instance of Admin Class
-     *
+     * 
      * @return ckexample_admin_class
      */
     function admin() : ckexample_admin_class {
         return ckexample_admin_class::get_instance();
     }
-
+    
     /**
      * Get the Plugin Namespace
-     *
+     * 
      * @return string - Namespace
      */
-	function ns() : string {
-		return $this->ns;
-	}
-
+    function ns() : string {
+        return $this->ns;
+    }
+    
     /**
      * Get the Name of the Plugin
-     *
+     * 
      * @return string - Name
      */
-	function name() : string {
-		return $this->name;
-	}
-
-	/**
+    function name() : string {
+        return $this->name;
+    }
+    
+    /**
      * Singleton Instance of Class
-     *
-     * @return string - Namespace
      */
     static function get_instance() : self {
         static $instance = false;
